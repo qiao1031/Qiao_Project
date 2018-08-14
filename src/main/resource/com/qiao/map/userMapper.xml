@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiao.entity.Account">
+
+    <select id="doLogin" resultType="com.qiao.entity.Account" parameterType="map">
+        select * from account where username=#{username} AND password=#{password}
+    </select>
+     <update id="addToken" parameterType="map" >
+         UPDATE account set token=#{token} where accountid=#{accountid}
+     </update>
+    <select id="findTokenByAccountid" resultType="String" parameterType="int">
+        SELECT  token from account where accountid=#{accountid}
+    </select>
+
+
+</mapper>

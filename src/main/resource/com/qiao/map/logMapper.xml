@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiao.dao.LogDao">
+
+    <!--商品添加到购物车-->
+  <insert id="add"  parameterType="com.qiao.entity.LogBean" statementType="PREPARED" keyColumn="id" keyProperty="id"
+  useGeneratedKeys="true">
+   insert into  logrecord(user_id,operation,create_time) VALUES (#{user_id},#{operation},now())
+  </insert>
+
+</mapper>

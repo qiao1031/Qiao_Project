@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiao.entity.Product">
+    <!--添加商品   -->
+    <insert id="addProduct" >
+        INSERT INTO shangpin(name, pdesc,  price,  rule, image, stock)VALUE (#{name},#{pdesc},#{price},#{rule},#{image},#{stock});
+    </insert>
+    <!--查看商品-->
+    <select id="findAll" resultType="com.qiao.entity.Product">
+        SELECT  * from shangpin
+    </select>
+    <!--修改商品-->
+    <update id="updateProduct" parameterType="com.qiao.entity.Product">
+        UPDATE shangpin
+        <set>
+                <if test="name!=null">name=#{name},</if>
+                <if test="pdesc!=null">pdesc=#{pdesc},</if>
+                <if test="price &gt; 0">price=#{price},</if>
+                <if test="rule!=null">rule=#{rule},</if>
+                <if test="image!=null">image=#{image},</if>
+                <if test="stock &gt; 0">stock=#{stock},</if>
+        </set>
+        WHERE  id=#{id}
+    </update>
+    <!--删除商品-->
+    <delete id="deleteProduct"  parameterType="int">
+        DELETE  FROM  shangpin WHERE  id=#{id}
+    </delete>
+    <!--通过id查找商品-->
+    <select id="findProductById" resultType="com.qiao.entity.Product" parameterType="int">
+        SELECT  * from shangpin WHERE id=#{id}
+    </select>
+    <!--分页查看商品-->
+    <select id="findProductByPage" resultType="com.qiao.entity.Product" parameterType="map">
+        SELECT  * FROM shangpin limit #{pageNo},#{pageSize}
+    </select>
+    <!--求出总页数-->
+    <select id="findTotalCount" resultType="int">
+        select count(id) FROM  shangpin
+    </select>
+</mapper>

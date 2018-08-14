@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ShowCart</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>购物车id</th>
+        <th>商品id</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+        <th>商品图片</th>
+        <th>商品规格</th>
+        <th>商品库存</th>
+        <th>商品描述</th>
+        <th>商品数量</th>
+        <th>商品操作</th>
+    </tr>
+
+
+
+    <tr>
+        <td>${cart.id}</td>
+        <td>${cart.product.id}</td>
+        <td>${cart.product.name}</td>
+        <td>${cart.product.price}</td>
+        <td>${cart.product.image}</td>
+        <td>${cart.product.rule}</td>
+        <td>${cart.product.stock}</td>
+        <td>${cart.product.desc}</td>
+        <td>${cart.productNum}</td>
+        <td>
+            <a href="cart?operation=5&id=$(cart.id)">修改</a>
+            <a href="cart?operation=4&id=$(cart.id)">删除</a>
+        </td>
+    </tr>

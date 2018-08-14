@@ -1,0 +1,34 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiao.entity.Category">
+    <!--添加购物车   -->
+    <insert id="addCategory" parameterType="com.qiao.entity.Category">
+        INSERT INTO category(parent_id, name, status,sort_order )VALUES (#{parent_id},#{name},#{status},#{sort_order});
+    </insert>
+    <!--察看购物车中商品信息   -->
+    <select id="findAll" resultType="com.qiao.entity.Category">
+        SELECT  * from category;
+    </select>
+    <!--修改购物车中商品数量   -->
+    <update id="updateCategory" parameterType="com.qiao.entity.Category">
+        UPDATE category set parent_id=#{parent_id},name=#{name},status=#{status},sort_order=#{sort_order} WHERE  id=#{id};
+    </update>
+    <!--删除购物车中商品数量   -->
+    <delete id="deleteCategory"  parameterType="int">
+        DELETE  FROM  category WHERE  id=#{id};
+    </delete>
+    <!--通过id查过类别   -->
+    <select id="findCategoryById" resultType="com.qiao.entity.Category" parameterType="int">
+        SELECT  * from category WHERE  id=#{id};
+    </select>
+    <!--分页查询类别   -->
+    <select id="findCategoryByPage" resultType="com.qiao.entity.Category" parameterType="map">
+        SELECT  * FROM category limit #{pageNo},#{pageSize};
+    </select>
+    <!--查询总页数-->
+    <select id="findTotalCount" resultType="int">
+        select count(id) FROM  category;
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="css/AddCart.css" />
+</head>
+<body>
+<h1>添加购物车</h1>
+<form action="cart" method="get">
+    <input type="hidden" name = "operation"  value="1" />
+    <table>
+
+        <tr>
+            <td>商品id</td>
+            <td><input type="text" name="id" /></td>
+        </tr>
+        <tr>
+            <td>商品数量</td>
+            <td><input type="text" name="num" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="提交"/></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

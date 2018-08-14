@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiao.entity.Cart">
+    <!--商品添加到购物车-->
+    <insert id="addCart"  parameterType="com.qiao.entity.Cart" statementType="PREPARED" keyColumn="id" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into  cart(productid,productnum) VALUES (#{product.id},#{productNum})
+    </insert>
+<!--一对一-->
+    <resultMap id="cart_product_resultmap" type="com.qiao.entity.Cart" autoMapping="true">
+            <result property="id" column="id"></result>
+        <association property="product" javaType="com.qiao.entity.Product" column="id"  autoMapping="true">
+            <result property="id" column="productid"></result>
+        </association>
+    </resultMap>
+
+    <select id="findAllCart"  resultMap="cart_product_resultmap">
+
+        select c.id, c.productnum ,p.id AS productid,p.name,p.pdesc,p.price,p.stock,p.rule from  cart c
+        LEFT join shangpin p
+        on c.productid=p.id
+    </select>
+
+
+    <update id="updataeCart" parameterType="com.qiao.entity.Cart">
+        UPDATE cart set productNum=#{num} WHERE  id=#{id}
+    </update>
+   <!-- 删除购物车  -->
+    <delete id="deleteCart"  parameterType="int">
+        DELETE  FROM  cart WHERE  id=#{id}
+    </delete>
+   <!-- 通过id查找购物车  -->
+    <select id="findCartById" resultType="com.qiao.entity.Cart"    parameterType="int">
+        SELECT  * from cart where id=#{id}
+    </select>
+   <!-- 分页查询购物车 -->
+    <select id="findCartByPage" resultType="com.qiao.entity.Cart" parameterType="map">
+        SELECT  * FROM cart limit #{pageNo},#{pageSize}
+    </select>
+   <!-- 一共多少页-->
+    <select id="findTotalCount" resultType="int">
+        select count(id) FROM  cart
+    </select>
+
+    <delete id="clearCart">
+        delete from  cart
+    </delete>
+</mapper>
